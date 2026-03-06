@@ -139,9 +139,18 @@ def _():
 
 @app.cell
 def _(fruits):
+    print("First fruits:", fruits[0])
+    return
+
+
+@app.cell
+def _(fruits):
     # List slicing
     print(f"First 3: {fruits[:3]}")
     print(f"Last 2: {fruits[-2:]}")
+
+    #
+    print(f"All Fruits with slicing: {fruits[:5]}")
     return
 
 

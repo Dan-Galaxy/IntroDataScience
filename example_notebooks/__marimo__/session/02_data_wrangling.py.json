@@ -1,0 +1,499 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.19.6"
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "17f78ccc3a3b14551f3d7e7b5da43d8f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"data-wrangling-with-polars\">Data Wrangling with Polars \ud83d\udc3b\u200d\u2744\ufe0f</h1>\n<span class=\"paragraph\"><strong>Welcome!</strong> Learn to load, explore, and transform data with Polars.</span>\n<span class=\"paragraph\"><strong>What you'll learn:</strong></span>\n<ul>\n<li>Loading data (CSV, JSON, Parquet)</li>\n<li>Exploring DataFrames</li>\n<li>Filtering and selecting data</li>\n<li>Creating new columns</li>\n<li>Grouping and aggregation</li>\n<li>Joining datasets</li>\n</ul>\n<span class=\"paragraph\"><strong>Estimated time:</strong> 60 minutes</span>\n<hr /></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "72f1442b694bc69cc19f7becb6f2d088",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"1-loading-data\">1. Loading Data</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "014e2f9373e35e7792f6acf93f82d178",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "\u2713 Loaded students.csv\nShape: 15 rows \u00d7 8 columns\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "c01b9b0d52c3c6dd9cec98694c870f9a",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='bkHC-0' random-id='2af9e9f4-4c84-2f79-c74b-dbd589624fa1'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;student_id&#92;&quot;:1,&#92;&quot;name&#92;&quot;:&#92;&quot;Emma Johnson&#92;&quot;,&#92;&quot;age&#92;&quot;:18,&#92;&quot;grade_level&#92;&quot;:8,&#92;&quot;subject&#92;&quot;:&#92;&quot;Mathematics&#92;&quot;,&#92;&quot;test_score&#92;&quot;:73.1,&#92;&quot;attendance_rate&#92;&quot;:78.5,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-04&#92;&quot;},{&#92;&quot;student_id&#92;&quot;:2,&#92;&quot;name&#92;&quot;:&#92;&quot;Liam Smith&#92;&quot;,&#92;&quot;age&#92;&quot;:18,&#92;&quot;grade_level&#92;&quot;:12,&#92;&quot;subject&#92;&quot;:&#92;&quot;Mathematics&#92;&quot;,&#92;&quot;test_score&#92;&quot;:66.0,&#92;&quot;attendance_rate&#92;&quot;:77.3,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-08&#92;&quot;},{&#92;&quot;student_id&#92;&quot;:3,&#92;&quot;name&#92;&quot;:&#92;&quot;Olivia Brown&#92;&quot;,&#92;&quot;age&#92;&quot;:17,&#92;&quot;grade_level&#92;&quot;:12,&#92;&quot;subject&#92;&quot;:&#92;&quot;Mathematics&#92;&quot;,&#92;&quot;test_score&#92;&quot;:88.6,&#92;&quot;attendance_rate&#92;&quot;:92.5,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-14&#92;&quot;},{&#92;&quot;student_id&#92;&quot;:4,&#92;&quot;name&#92;&quot;:&#92;&quot;Noah Davis&#92;&quot;,&#92;&quot;age&#92;&quot;:14,&#92;&quot;grade_level&#92;&quot;:11,&#92;&quot;subject&#92;&quot;:&#92;&quot;Art&#92;&quot;,&#92;&quot;test_score&#92;&quot;:93.7,&#92;&quot;attendance_rate&#92;&quot;:94.0,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-06&#92;&quot;},{&#92;&quot;student_id&#92;&quot;:5,&#92;&quot;name&#92;&quot;:&#92;&quot;Ava Wilson&#92;&quot;,&#92;&quot;age&#92;&quot;:18,&#92;&quot;grade_level&#92;&quot;:11,&#92;&quot;subject&#92;&quot;:&#92;&quot;English&#92;&quot;,&#92;&quot;test_score&#92;&quot;:72.1,&#92;&quot;attendance_rate&#92;&quot;:94.1,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-04&#92;&quot;}]&quot;' data-total-rows='5' data-total-columns='8' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;student_id&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;name&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;age&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;grade_level&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;subject&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;test_score&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attendance_rate&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;enrollment_date&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "a2bee0a45c8e09d9b396d79cf4ef5ec9",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='kpYl-0' random-id='db57f5f2-c01b-efd7-7447-42d776d3ab87'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;statistic&#92;&quot;:&#92;&quot;count&#92;&quot;,&#92;&quot;student_id&#92;&quot;:15.0,&#92;&quot;name&#92;&quot;:&#92;&quot;15&#92;&quot;,&#92;&quot;age&#92;&quot;:15.0,&#92;&quot;grade_level&#92;&quot;:15.0,&#92;&quot;subject&#92;&quot;:&#92;&quot;15&#92;&quot;,&#92;&quot;test_score&#92;&quot;:15.0,&#92;&quot;attendance_rate&#92;&quot;:15.0,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;15&#92;&quot;},{&#92;&quot;statistic&#92;&quot;:&#92;&quot;null_count&#92;&quot;,&#92;&quot;student_id&#92;&quot;:0.0,&#92;&quot;name&#92;&quot;:&#92;&quot;0&#92;&quot;,&#92;&quot;age&#92;&quot;:0.0,&#92;&quot;grade_level&#92;&quot;:0.0,&#92;&quot;subject&#92;&quot;:&#92;&quot;0&#92;&quot;,&#92;&quot;test_score&#92;&quot;:0.0,&#92;&quot;attendance_rate&#92;&quot;:0.0,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;0&#92;&quot;},{&#92;&quot;statistic&#92;&quot;:&#92;&quot;mean&#92;&quot;,&#92;&quot;student_id&#92;&quot;:8.0,&#92;&quot;name&#92;&quot;:null,&#92;&quot;age&#92;&quot;:16.266666666666666,&#92;&quot;grade_level&#92;&quot;:10.066666666666666,&#92;&quot;subject&#92;&quot;:null,&#92;&quot;test_score&#92;&quot;:80.35333333333334,&#92;&quot;attendance_rate&#92;&quot;:86.83333333333333,&#92;&quot;enrollment_date&#92;&quot;:null},{&#92;&quot;statistic&#92;&quot;:&#92;&quot;std&#92;&quot;,&#92;&quot;student_id&#92;&quot;:4.47213595499958,&#92;&quot;name&#92;&quot;:null,&#92;&quot;age&#92;&quot;:1.9073791542572853,&#92;&quot;grade_level&#92;&quot;:1.533747356112131,&#92;&quot;subject&#92;&quot;:null,&#92;&quot;test_score&#92;&quot;:9.049140974752929,&#92;&quot;attendance_rate&#92;&quot;:8.13086418414134,&#92;&quot;enrollment_date&#92;&quot;:null},{&#92;&quot;statistic&#92;&quot;:&#92;&quot;min&#92;&quot;,&#92;&quot;student_id&#92;&quot;:1.0,&#92;&quot;name&#92;&quot;:&#92;&quot;Amelia Garcia&#92;&quot;,&#92;&quot;age&#92;&quot;:13.0,&#92;&quot;grade_level&#92;&quot;:8.0,&#92;&quot;subject&#92;&quot;:&#92;&quot;Art&#92;&quot;,&#92;&quot;test_score&#92;&quot;:66.0,&#92;&quot;attendance_rate&#92;&quot;:76.1,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-02&#92;&quot;},{&#92;&quot;statistic&#92;&quot;:&#92;&quot;25%&#92;&quot;,&#92;&quot;student_id&#92;&quot;:5.0,&#92;&quot;name&#92;&quot;:null,&#92;&quot;age&#92;&quot;:15.0,&#92;&quot;grade_level&#92;&quot;:9.0,&#92;&quot;subject&#92;&quot;:null,&#92;&quot;test_score&#92;&quot;:75.7,&#92;&quot;attendance_rate&#92;&quot;:81.1,&#92;&quot;enrollment_date&#92;&quot;:null},{&#92;&quot;statistic&#92;&quot;:&#92;&quot;50%&#92;&quot;,&#92;&quot;student_id&#92;&quot;:8.0,&#92;&quot;name&#92;&quot;:null,&#92;&quot;age&#92;&quot;:17.0,&#92;&quot;grade_level&#92;&quot;:10.0,&#92;&quot;subject&#92;&quot;:null,&#92;&quot;test_score&#92;&quot;:78.1,&#92;&quot;attendance_rate&#92;&quot;:86.3,&#92;&quot;enrollment_date&#92;&quot;:null},{&#92;&quot;statistic&#92;&quot;:&#92;&quot;75%&#92;&quot;,&#92;&quot;student_id&#92;&quot;:12.0,&#92;&quot;name&#92;&quot;:null,&#92;&quot;age&#92;&quot;:18.0,&#92;&quot;grade_level&#92;&quot;:11.0,&#92;&quot;subject&#92;&quot;:null,&#92;&quot;test_score&#92;&quot;:88.3,&#92;&quot;attendance_rate&#92;&quot;:94.1,&#92;&quot;enrollment_date&#92;&quot;:null},{&#92;&quot;statistic&#92;&quot;:&#92;&quot;max&#92;&quot;,&#92;&quot;student_id&#92;&quot;:15.0,&#92;&quot;name&#92;&quot;:&#92;&quot;William Jackson&#92;&quot;,&#92;&quot;age&#92;&quot;:18.0,&#92;&quot;grade_level&#92;&quot;:12.0,&#92;&quot;subject&#92;&quot;:&#92;&quot;Science&#92;&quot;,&#92;&quot;test_score&#92;&quot;:95.4,&#92;&quot;attendance_rate&#92;&quot;:97.9,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-27&#92;&quot;}]&quot;' data-total-rows='9' data-total-columns='9' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;statistic&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;student_id&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;name&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;age&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;grade_level&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;subject&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;test_score&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attendance_rate&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;enrollment_date&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "9b547f10dfe128dc571274d35b16101c",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"loading-json\">Loading JSON</h3></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "901415f88826421d4e2f8fd3f011fb04",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "\u2713 Loaded sales.json\nShape: 500 rows \u00d7 10 columns\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "1fac875b54c407e37256294753b2ac87",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='Xref-0' random-id='aa7b0747-80f9-18c1-b772-4a8066f22dde'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;transaction_id&#92;&quot;:&#92;&quot;TXN0001&#92;&quot;,&#92;&quot;date&#92;&quot;:&#92;&quot;2024-03-11&#92;&quot;,&#92;&quot;customer_id&#92;&quot;:&#92;&quot;CUST131&#92;&quot;,&#92;&quot;product_category&#92;&quot;:&#92;&quot;Home &amp; Garden&#92;&quot;,&#92;&quot;product_name&#92;&quot;:&#92;&quot;Paint&#92;&quot;,&#92;&quot;quantity&#92;&quot;:4,&#92;&quot;unit_price&#92;&quot;:187.38,&#92;&quot;total_amount&#92;&quot;:749.52,&#92;&quot;payment_method&#92;&quot;:&#92;&quot;Credit Card&#92;&quot;,&#92;&quot;region&#92;&quot;:&#92;&quot;North&#92;&quot;},{&#92;&quot;transaction_id&#92;&quot;:&#92;&quot;TXN0002&#92;&quot;,&#92;&quot;date&#92;&quot;:&#92;&quot;2024-07-16&#92;&quot;,&#92;&quot;customer_id&#92;&quot;:&#92;&quot;CUST098&#92;&quot;,&#92;&quot;product_category&#92;&quot;:&#92;&quot;Clothing&#92;&quot;,&#92;&quot;product_name&#92;&quot;:&#92;&quot;Jeans&#92;&quot;,&#92;&quot;quantity&#92;&quot;:4,&#92;&quot;unit_price&#92;&quot;:302.24,&#92;&quot;total_amount&#92;&quot;:1208.96,&#92;&quot;payment_method&#92;&quot;:&#92;&quot;Cash&#92;&quot;,&#92;&quot;region&#92;&quot;:&#92;&quot;Central&#92;&quot;},{&#92;&quot;transaction_id&#92;&quot;:&#92;&quot;TXN0003&#92;&quot;,&#92;&quot;date&#92;&quot;:&#92;&quot;2024-02-28&#92;&quot;,&#92;&quot;customer_id&#92;&quot;:&#92;&quot;CUST175&#92;&quot;,&#92;&quot;product_category&#92;&quot;:&#92;&quot;Books&#92;&quot;,&#92;&quot;product_name&#92;&quot;:&#92;&quot;Comic&#92;&quot;,&#92;&quot;quantity&#92;&quot;:1,&#92;&quot;unit_price&#92;&quot;:343.34,&#92;&quot;total_amount&#92;&quot;:343.34,&#92;&quot;payment_method&#92;&quot;:&#92;&quot;PayPal&#92;&quot;,&#92;&quot;region&#92;&quot;:&#92;&quot;East&#92;&quot;},{&#92;&quot;transaction_id&#92;&quot;:&#92;&quot;TXN0004&#92;&quot;,&#92;&quot;date&#92;&quot;:&#92;&quot;2024-01-02&#92;&quot;,&#92;&quot;customer_id&#92;&quot;:&#92;&quot;CUST185&#92;&quot;,&#92;&quot;product_category&#92;&quot;:&#92;&quot;Electronics&#92;&quot;,&#92;&quot;product_name&#92;&quot;:&#92;&quot;Tablet&#92;&quot;,&#92;&quot;quantity&#92;&quot;:4,&#92;&quot;unit_price&#92;&quot;:87.5,&#92;&quot;total_amount&#92;&quot;:350.0,&#92;&quot;payment_method&#92;&quot;:&#92;&quot;PayPal&#92;&quot;,&#92;&quot;region&#92;&quot;:&#92;&quot;Central&#92;&quot;},{&#92;&quot;transaction_id&#92;&quot;:&#92;&quot;TXN0005&#92;&quot;,&#92;&quot;date&#92;&quot;:&#92;&quot;2024-06-01&#92;&quot;,&#92;&quot;customer_id&#92;&quot;:&#92;&quot;CUST164&#92;&quot;,&#92;&quot;product_category&#92;&quot;:&#92;&quot;Clothing&#92;&quot;,&#92;&quot;product_name&#92;&quot;:&#92;&quot;Hat&#92;&quot;,&#92;&quot;quantity&#92;&quot;:1,&#92;&quot;unit_price&#92;&quot;:436.55,&#92;&quot;total_amount&#92;&quot;:436.55,&#92;&quot;payment_method&#92;&quot;:&#92;&quot;Debit Card&#92;&quot;,&#92;&quot;region&#92;&quot;:&#92;&quot;South&#92;&quot;}]&quot;' data-total-rows='5' data-total-columns='10' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;transaction_id&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;date&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;customer_id&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;product_category&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;product_name&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;quantity&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;unit_price&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;total_amount&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;payment_method&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;region&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "BYtC",
+      "code_hash": "904ca9c7f855083c81c35827a58b15ef",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"2-exploring-dataframes\">2. Exploring DataFrames</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "RGSE",
+      "code_hash": "7d457162dd3ef5a54bbae0402a875f9b",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "Schema:\nSchema({'student_id': Int64, 'name': String, 'age': Int64, 'grade_level': Int64, 'subject': String, 'test_score': Float64, 'attendance_rate': Float64, 'enrollment_date': String})\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "Kclp",
+      "code_hash": "9d417b806cce015257e21a95d51a49f9",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='RGSE-0' random-id='1130bf12-c3f9-f2b5-8c69-3b0ebb743e6f'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;statistic&#92;&quot;:&#92;&quot;count&#92;&quot;,&#92;&quot;student_id&#92;&quot;:15.0,&#92;&quot;name&#92;&quot;:&#92;&quot;15&#92;&quot;,&#92;&quot;age&#92;&quot;:15.0,&#92;&quot;grade_level&#92;&quot;:15.0,&#92;&quot;subject&#92;&quot;:&#92;&quot;15&#92;&quot;,&#92;&quot;test_score&#92;&quot;:15.0,&#92;&quot;attendance_rate&#92;&quot;:15.0,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;15&#92;&quot;},{&#92;&quot;statistic&#92;&quot;:&#92;&quot;null_count&#92;&quot;,&#92;&quot;student_id&#92;&quot;:0.0,&#92;&quot;name&#92;&quot;:&#92;&quot;0&#92;&quot;,&#92;&quot;age&#92;&quot;:0.0,&#92;&quot;grade_level&#92;&quot;:0.0,&#92;&quot;subject&#92;&quot;:&#92;&quot;0&#92;&quot;,&#92;&quot;test_score&#92;&quot;:0.0,&#92;&quot;attendance_rate&#92;&quot;:0.0,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;0&#92;&quot;},{&#92;&quot;statistic&#92;&quot;:&#92;&quot;mean&#92;&quot;,&#92;&quot;student_id&#92;&quot;:8.0,&#92;&quot;name&#92;&quot;:null,&#92;&quot;age&#92;&quot;:16.266666666666666,&#92;&quot;grade_level&#92;&quot;:10.066666666666666,&#92;&quot;subject&#92;&quot;:null,&#92;&quot;test_score&#92;&quot;:80.35333333333334,&#92;&quot;attendance_rate&#92;&quot;:86.83333333333333,&#92;&quot;enrollment_date&#92;&quot;:null},{&#92;&quot;statistic&#92;&quot;:&#92;&quot;std&#92;&quot;,&#92;&quot;student_id&#92;&quot;:4.47213595499958,&#92;&quot;name&#92;&quot;:null,&#92;&quot;age&#92;&quot;:1.9073791542572853,&#92;&quot;grade_level&#92;&quot;:1.533747356112131,&#92;&quot;subject&#92;&quot;:null,&#92;&quot;test_score&#92;&quot;:9.049140974752929,&#92;&quot;attendance_rate&#92;&quot;:8.13086418414134,&#92;&quot;enrollment_date&#92;&quot;:null},{&#92;&quot;statistic&#92;&quot;:&#92;&quot;min&#92;&quot;,&#92;&quot;student_id&#92;&quot;:1.0,&#92;&quot;name&#92;&quot;:&#92;&quot;Amelia Garcia&#92;&quot;,&#92;&quot;age&#92;&quot;:13.0,&#92;&quot;grade_level&#92;&quot;:8.0,&#92;&quot;subject&#92;&quot;:&#92;&quot;Art&#92;&quot;,&#92;&quot;test_score&#92;&quot;:66.0,&#92;&quot;attendance_rate&#92;&quot;:76.1,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-02&#92;&quot;},{&#92;&quot;statistic&#92;&quot;:&#92;&quot;25%&#92;&quot;,&#92;&quot;student_id&#92;&quot;:5.0,&#92;&quot;name&#92;&quot;:null,&#92;&quot;age&#92;&quot;:15.0,&#92;&quot;grade_level&#92;&quot;:9.0,&#92;&quot;subject&#92;&quot;:null,&#92;&quot;test_score&#92;&quot;:75.7,&#92;&quot;attendance_rate&#92;&quot;:81.1,&#92;&quot;enrollment_date&#92;&quot;:null},{&#92;&quot;statistic&#92;&quot;:&#92;&quot;50%&#92;&quot;,&#92;&quot;student_id&#92;&quot;:8.0,&#92;&quot;name&#92;&quot;:null,&#92;&quot;age&#92;&quot;:17.0,&#92;&quot;grade_level&#92;&quot;:10.0,&#92;&quot;subject&#92;&quot;:null,&#92;&quot;test_score&#92;&quot;:78.1,&#92;&quot;attendance_rate&#92;&quot;:86.3,&#92;&quot;enrollment_date&#92;&quot;:null},{&#92;&quot;statistic&#92;&quot;:&#92;&quot;75%&#92;&quot;,&#92;&quot;student_id&#92;&quot;:12.0,&#92;&quot;name&#92;&quot;:null,&#92;&quot;age&#92;&quot;:18.0,&#92;&quot;grade_level&#92;&quot;:11.0,&#92;&quot;subject&#92;&quot;:null,&#92;&quot;test_score&#92;&quot;:88.3,&#92;&quot;attendance_rate&#92;&quot;:94.1,&#92;&quot;enrollment_date&#92;&quot;:null},{&#92;&quot;statistic&#92;&quot;:&#92;&quot;max&#92;&quot;,&#92;&quot;student_id&#92;&quot;:15.0,&#92;&quot;name&#92;&quot;:&#92;&quot;William Jackson&#92;&quot;,&#92;&quot;age&#92;&quot;:18.0,&#92;&quot;grade_level&#92;&quot;:12.0,&#92;&quot;subject&#92;&quot;:&#92;&quot;Science&#92;&quot;,&#92;&quot;test_score&#92;&quot;:95.4,&#92;&quot;attendance_rate&#92;&quot;:97.9,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-27&#92;&quot;}]&quot;' data-total-rows='9' data-total-columns='9' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;statistic&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;student_id&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;name&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;age&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;grade_level&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;subject&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;test_score&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attendance_rate&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;enrollment_date&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "emfo",
+      "code_hash": "8e1da3effb59f0c301e7340966ccde41",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "Columns: ['student_id', 'name', 'age', 'grade_level', 'subject', 'test_score', 'attendance_rate', 'enrollment_date']\nRows: 15, Columns: 8\n\nNull counts:\nshape: (1, 8)\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 student_id \u2506 name \u2506 age \u2506 grade_level \u2506 subject \u2506 test_score \u2506 attendance_rate \u2506 enrollment_date \u2502\n\u2502 ---        \u2506 ---  \u2506 --- \u2506 ---         \u2506 ---     \u2506 ---        \u2506 ---             \u2506 ---             \u2502\n\u2502 u32        \u2506 u32  \u2506 u32 \u2506 u32         \u2506 u32     \u2506 u32        \u2506 u32             \u2506 u32             \u2502\n\u255e\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u256a\u2550\u2550\u2550\u2550\u2550\u2550\u256a\u2550\u2550\u2550\u2550\u2550\u256a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u256a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u256a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u256a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u256a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2561\n\u2502 0          \u2506 0    \u2506 0   \u2506 0           \u2506 0       \u2506 0          \u2506 0               \u2506 0               \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "Hstk",
+      "code_hash": "8fc83439417c954cf3733b85e02b06a0",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"3-selecting-columns\">3. Selecting Columns</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "nWHF",
+      "code_hash": "3fbbb48d6e5b7cab96b875cfd33913d3",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='Hstk-0' random-id='de533c64-55e3-8f7b-0179-00bff0628d28'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;name&#92;&quot;:&#92;&quot;Emma Johnson&#92;&quot;,&#92;&quot;age&#92;&quot;:18},{&#92;&quot;name&#92;&quot;:&#92;&quot;Liam Smith&#92;&quot;,&#92;&quot;age&#92;&quot;:18},{&#92;&quot;name&#92;&quot;:&#92;&quot;Olivia Brown&#92;&quot;,&#92;&quot;age&#92;&quot;:17},{&#92;&quot;name&#92;&quot;:&#92;&quot;Noah Davis&#92;&quot;,&#92;&quot;age&#92;&quot;:14},{&#92;&quot;name&#92;&quot;:&#92;&quot;Ava Wilson&#92;&quot;,&#92;&quot;age&#92;&quot;:18}]&quot;' data-total-rows='5' data-total-columns='2' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;name&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;age&quot;,[&quot;integer&quot;,&quot;i64&quot;]]]' data-show-filters='true' data-show-download='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "iLit",
+      "code_hash": "bf97ed131bc69b2b42d86c33fe32cde4",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='nWHF-0' random-id='f29f8382-7d8e-e09c-8b10-c0ea4591804a'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;name&#92;&quot;:&#92;&quot;Emma Johnson&#92;&quot;,&#92;&quot;score&#92;&quot;:73.1},{&#92;&quot;name&#92;&quot;:&#92;&quot;Liam Smith&#92;&quot;,&#92;&quot;score&#92;&quot;:66.0},{&#92;&quot;name&#92;&quot;:&#92;&quot;Olivia Brown&#92;&quot;,&#92;&quot;score&#92;&quot;:88.6},{&#92;&quot;name&#92;&quot;:&#92;&quot;Noah Davis&#92;&quot;,&#92;&quot;score&#92;&quot;:93.7},{&#92;&quot;name&#92;&quot;:&#92;&quot;Ava Wilson&#92;&quot;,&#92;&quot;score&#92;&quot;:72.1}]&quot;' data-total-rows='5' data-total-columns='2' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;name&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;score&quot;,[&quot;number&quot;,&quot;f64&quot;]]]' data-show-filters='true' data-show-download='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ZHCJ",
+      "code_hash": "78cc7dfab89d1478006746510301c9ae",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"4-filtering-rows\">4. Filtering Rows</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ROlb",
+      "code_hash": "bc1368486afb5934ba2fade6f1b9279d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='ZHCJ-0' random-id='ba7d7e99-8f4c-2956-52aa-e3443ac74933'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;student_id&#92;&quot;:3,&#92;&quot;name&#92;&quot;:&#92;&quot;Olivia Brown&#92;&quot;,&#92;&quot;age&#92;&quot;:17,&#92;&quot;grade_level&#92;&quot;:12,&#92;&quot;subject&#92;&quot;:&#92;&quot;Mathematics&#92;&quot;,&#92;&quot;test_score&#92;&quot;:88.6,&#92;&quot;attendance_rate&#92;&quot;:92.5,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-14&#92;&quot;},{&#92;&quot;student_id&#92;&quot;:4,&#92;&quot;name&#92;&quot;:&#92;&quot;Noah Davis&#92;&quot;,&#92;&quot;age&#92;&quot;:14,&#92;&quot;grade_level&#92;&quot;:11,&#92;&quot;subject&#92;&quot;:&#92;&quot;Art&#92;&quot;,&#92;&quot;test_score&#92;&quot;:93.7,&#92;&quot;attendance_rate&#92;&quot;:94.0,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-06&#92;&quot;},{&#92;&quot;student_id&#92;&quot;:7,&#92;&quot;name&#92;&quot;:&#92;&quot;Sophia Taylor&#92;&quot;,&#92;&quot;age&#92;&quot;:18,&#92;&quot;grade_level&#92;&quot;:11,&#92;&quot;subject&#92;&quot;:&#92;&quot;Art&#92;&quot;,&#92;&quot;test_score&#92;&quot;:95.4,&#92;&quot;attendance_rate&#92;&quot;:77.0,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-10&#92;&quot;},{&#92;&quot;student_id&#92;&quot;:8,&#92;&quot;name&#92;&quot;:&#92;&quot;Mason Anderson&#92;&quot;,&#92;&quot;age&#92;&quot;:18,&#92;&quot;grade_level&#92;&quot;:12,&#92;&quot;subject&#92;&quot;:&#92;&quot;English&#92;&quot;,&#92;&quot;test_score&#92;&quot;:88.3,&#92;&quot;attendance_rate&#92;&quot;:76.1,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-08&#92;&quot;},{&#92;&quot;student_id&#92;&quot;:10,&#92;&quot;name&#92;&quot;:&#92;&quot;William Jackson&#92;&quot;,&#92;&quot;age&#92;&quot;:15,&#92;&quot;grade_level&#92;&quot;:9,&#92;&quot;subject&#92;&quot;:&#92;&quot;English&#92;&quot;,&#92;&quot;test_score&#92;&quot;:87.1,&#92;&quot;attendance_rate&#92;&quot;:92.5,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-22&#92;&quot;}]&quot;' data-total-rows='5' data-total-columns='8' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;student_id&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;name&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;age&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;grade_level&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;subject&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;test_score&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attendance_rate&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;enrollment_date&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "Students with score > 85: 5\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "qnkX",
+      "code_hash": "db0ec7b43c2a9f7ba49072cd96bb396d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='ROlb-0' random-id='5bf96dc5-bebd-b94d-ac27-e21a259c66a0'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;student_id&#92;&quot;:3,&#92;&quot;name&#92;&quot;:&#92;&quot;Olivia Brown&#92;&quot;,&#92;&quot;age&#92;&quot;:17,&#92;&quot;grade_level&#92;&quot;:12,&#92;&quot;subject&#92;&quot;:&#92;&quot;Mathematics&#92;&quot;,&#92;&quot;test_score&#92;&quot;:88.6,&#92;&quot;attendance_rate&#92;&quot;:92.5,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-14&#92;&quot;},{&#92;&quot;student_id&#92;&quot;:4,&#92;&quot;name&#92;&quot;:&#92;&quot;Noah Davis&#92;&quot;,&#92;&quot;age&#92;&quot;:14,&#92;&quot;grade_level&#92;&quot;:11,&#92;&quot;subject&#92;&quot;:&#92;&quot;Art&#92;&quot;,&#92;&quot;test_score&#92;&quot;:93.7,&#92;&quot;attendance_rate&#92;&quot;:94.0,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-06&#92;&quot;},{&#92;&quot;student_id&#92;&quot;:10,&#92;&quot;name&#92;&quot;:&#92;&quot;William Jackson&#92;&quot;,&#92;&quot;age&#92;&quot;:15,&#92;&quot;grade_level&#92;&quot;:9,&#92;&quot;subject&#92;&quot;:&#92;&quot;English&#92;&quot;,&#92;&quot;test_score&#92;&quot;:87.1,&#92;&quot;attendance_rate&#92;&quot;:92.5,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-22&#92;&quot;}]&quot;' data-total-rows='3' data-total-columns='8' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;student_id&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;name&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;age&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;grade_level&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;subject&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;test_score&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attendance_rate&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;enrollment_date&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "Students with good attendance AND high scores: 3\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "TqIu",
+      "code_hash": "2df933b50009e03c59b4117f3704f8de",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='qnkX-0' random-id='9393dfaa-efe7-9e76-4335-c0d4276b4ff7'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;student_id&#92;&quot;:1,&#92;&quot;name&#92;&quot;:&#92;&quot;Emma Johnson&#92;&quot;,&#92;&quot;age&#92;&quot;:18,&#92;&quot;grade_level&#92;&quot;:8,&#92;&quot;subject&#92;&quot;:&#92;&quot;Mathematics&#92;&quot;,&#92;&quot;test_score&#92;&quot;:73.1,&#92;&quot;attendance_rate&#92;&quot;:78.5,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-04&#92;&quot;},{&#92;&quot;student_id&#92;&quot;:2,&#92;&quot;name&#92;&quot;:&#92;&quot;Liam Smith&#92;&quot;,&#92;&quot;age&#92;&quot;:18,&#92;&quot;grade_level&#92;&quot;:12,&#92;&quot;subject&#92;&quot;:&#92;&quot;Mathematics&#92;&quot;,&#92;&quot;test_score&#92;&quot;:66.0,&#92;&quot;attendance_rate&#92;&quot;:77.3,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-08&#92;&quot;},{&#92;&quot;student_id&#92;&quot;:3,&#92;&quot;name&#92;&quot;:&#92;&quot;Olivia Brown&#92;&quot;,&#92;&quot;age&#92;&quot;:17,&#92;&quot;grade_level&#92;&quot;:12,&#92;&quot;subject&#92;&quot;:&#92;&quot;Mathematics&#92;&quot;,&#92;&quot;test_score&#92;&quot;:88.6,&#92;&quot;attendance_rate&#92;&quot;:92.5,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-14&#92;&quot;},{&#92;&quot;student_id&#92;&quot;:6,&#92;&quot;name&#92;&quot;:&#92;&quot;Ethan Moore&#92;&quot;,&#92;&quot;age&#92;&quot;:13,&#92;&quot;grade_level&#92;&quot;:11,&#92;&quot;subject&#92;&quot;:&#92;&quot;Mathematics&#92;&quot;,&#92;&quot;test_score&#92;&quot;:76.4,&#92;&quot;attendance_rate&#92;&quot;:81.6,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-02&#92;&quot;},{&#92;&quot;student_id&#92;&quot;:9,&#92;&quot;name&#92;&quot;:&#92;&quot;Isabella Thomas&#92;&quot;,&#92;&quot;age&#92;&quot;:15,&#92;&quot;grade_level&#92;&quot;:8,&#92;&quot;subject&#92;&quot;:&#92;&quot;Science&#92;&quot;,&#92;&quot;test_score&#92;&quot;:77.5,&#92;&quot;attendance_rate&#92;&quot;:86.3,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-27&#92;&quot;},{&#92;&quot;student_id&#92;&quot;:14,&#92;&quot;name&#92;&quot;:&#92;&quot;Benjamin Thompson&#92;&quot;,&#92;&quot;age&#92;&quot;:18,&#92;&quot;grade_level&#92;&quot;:10,&#92;&quot;subject&#92;&quot;:&#92;&quot;Science&#92;&quot;,&#92;&quot;test_score&#92;&quot;:78.1,&#92;&quot;attendance_rate&#92;&quot;:97.9,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-15&#92;&quot;},{&#92;&quot;student_id&#92;&quot;:15,&#92;&quot;name&#92;&quot;:&#92;&quot;Amelia Garcia&#92;&quot;,&#92;&quot;age&#92;&quot;:14,&#92;&quot;grade_level&#92;&quot;:10,&#92;&quot;subject&#92;&quot;:&#92;&quot;Science&#92;&quot;,&#92;&quot;test_score&#92;&quot;:83.5,&#92;&quot;attendance_rate&#92;&quot;:81.6,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-19&#92;&quot;}]&quot;' data-total-rows='7' data-total-columns='8' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;student_id&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;name&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;age&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;grade_level&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;subject&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;test_score&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attendance_rate&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;enrollment_date&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='true' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": [
+        {
+          "type": "stream",
+          "name": "stdout",
+          "text": "Math or Science students: 7\n",
+          "mimetype": "text/plain"
+        }
+      ]
+    },
+    {
+      "id": "Vxnm",
+      "code_hash": "af258d50d510168f6d28247b778783a8",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"5-sorting-data\">5. Sorting Data</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "DnEU",
+      "code_hash": "16beaf0fae0c972ea8cb22af725126e4",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<marimo-ui-element object-id='Vxnm-0' random-id='e64a0b4e-d6a8-a974-6aba-11ed60c15a45'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;student_id&#92;&quot;:7,&#92;&quot;name&#92;&quot;:&#92;&quot;Sophia Taylor&#92;&quot;,&#92;&quot;age&#92;&quot;:18,&#92;&quot;grade_level&#92;&quot;:11,&#92;&quot;subject&#92;&quot;:&#92;&quot;Art&#92;&quot;,&#92;&quot;test_score&#92;&quot;:95.4,&#92;&quot;attendance_rate&#92;&quot;:77.0,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-10&#92;&quot;},{&#92;&quot;student_id&#92;&quot;:4,&#92;&quot;name&#92;&quot;:&#92;&quot;Noah Davis&#92;&quot;,&#92;&quot;age&#92;&quot;:14,&#92;&quot;grade_level&#92;&quot;:11,&#92;&quot;subject&#92;&quot;:&#92;&quot;Art&#92;&quot;,&#92;&quot;test_score&#92;&quot;:93.7,&#92;&quot;attendance_rate&#92;&quot;:94.0,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-06&#92;&quot;},{&#92;&quot;student_id&#92;&quot;:3,&#92;&quot;name&#92;&quot;:&#92;&quot;Olivia Brown&#92;&quot;,&#92;&quot;age&#92;&quot;:17,&#92;&quot;grade_level&#92;&quot;:12,&#92;&quot;subject&#92;&quot;:&#92;&quot;Mathematics&#92;&quot;,&#92;&quot;test_score&#92;&quot;:88.6,&#92;&quot;attendance_rate&#92;&quot;:92.5,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-14&#92;&quot;},{&#92;&quot;student_id&#92;&quot;:8,&#92;&quot;name&#92;&quot;:&#92;&quot;Mason Anderson&#92;&quot;,&#92;&quot;age&#92;&quot;:18,&#92;&quot;grade_level&#92;&quot;:12,&#92;&quot;subject&#92;&quot;:&#92;&quot;English&#92;&quot;,&#92;&quot;test_score&#92;&quot;:88.3,&#92;&quot;attendance_rate&#92;&quot;:76.1,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-08&#92;&quot;},{&#92;&quot;student_id&#92;&quot;:10,&#92;&quot;name&#92;&quot;:&#92;&quot;William Jackson&#92;&quot;,&#92;&quot;age&#92;&quot;:15,&#92;&quot;grade_level&#92;&quot;:9,&#92;&quot;subject&#92;&quot;:&#92;&quot;English&#92;&quot;,&#92;&quot;test_score&#92;&quot;:87.1,&#92;&quot;attendance_rate&#92;&quot;:92.5,&#92;&quot;enrollment_date&#92;&quot;:&#92;&quot;2023-09-22&#92;&quot;}]&quot;' data-total-rows='5' data-total-columns='8' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='true' data-page-size='10' data-field-types='[[&quot;student_id&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;name&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;age&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;grade_level&quot;,[&quot;integer&quot;,&quot;i64&quot;]],[&quot;subject&quot;,[&quot;string&quot;,&quot;str&quot;]],[&quot;test_score&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;attendance_rate&quot;,[&quot;number&quot;,&quot;f64&quot;]],[&quot;enrollment_date&quot;,[&quot;string&quot;,&quot;str&quot;]]]' data-show-filters='true' data-show-download='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ulZA",
+      "code_hash": "0ea0f5fbad07d1c501be2ef149e55a0f",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ecfG",
+      "code_hash": "b35422258aed0bdd99b5cbbeff2d56f1",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"6-creating-new-columns\">6. Creating New Columns</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Pvdt",
+      "code_hash": "81d639508d5c99709a53f80880ce2761",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ZBYS",
+      "code_hash": "610f4344b0b575c9542bf288ea242990",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "aLJB",
+      "code_hash": "06222d4582069190f8e1ff6a7d33bf49",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"7-handling-missing-values\">7. Handling Missing Values</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "nHfw",
+      "code_hash": "a3a359a4a582d4d7df074a69ec1c055b",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "xXTn",
+      "code_hash": "da849b55d8550e9ec3cc18a2b2ccac85",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "AjVT",
+      "code_hash": "8f18c8ecfb6ed995d2f92b92413d9cf7",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "pHFh",
+      "code_hash": "209ecb631f9f3f2b8faf9edf9200c17d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"8-working-with-dates\">8. Working with Dates</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "NCOB",
+      "code_hash": "222d4366f0eddf82224feeaecb65333c",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "aqbW",
+      "code_hash": "50f2fd7e5c10b988853472d25048c911",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "TRpd",
+      "code_hash": "413cfb6fd46f86dcad3edac11e04ffeb",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"9-joining-dataframes\">9. Joining DataFrames</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "TXez",
+      "code_hash": "6950b84c2be12f8ea53093b842b717a4",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "dNNg",
+      "code_hash": "9b05a618af976d28c9242255689e9883",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "yCnT",
+      "code_hash": "1b29d9cdf9a2eb2ea76f3a4e5ec351f4",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"10-chaining-operations\">10. Chaining Operations</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "wlCL",
+      "code_hash": "794d6b9bdf27f3229f3bae1e52b50edb",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "kqZH",
+      "code_hash": "9b94785fb1ef5d04720b3915df390360",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"11-data-cleaning-example\">11. Data Cleaning Example</h2>\n<span class=\"paragraph\">Let's clean the sales data which has some quality issues:</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "wAgl",
+      "code_hash": "0c93b990141b0d8bb3fdcdb547ab9257",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "rEll",
+      "code_hash": "6d679e90ff4431ce71a13a9f4f172019",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"great-job\">\ud83c\udf89 Great Job!</h2>\n<span class=\"paragraph\">You've learned data wrangling with Polars! You now know how to:</span>\n<ul>\n<li>\u2705 Load CSV, JSON, and Parquet files</li>\n<li>\u2705 Explore and understand your data</li>\n<li>\u2705 Filter and select data</li>\n<li>\u2705 Create new calculated columns</li>\n<li>\u2705 Handle missing values</li>\n<li>\u2705 Work with dates</li>\n<li>\u2705 Join multiple datasets</li>\n<li>\u2705 Chain operations for complex analysis</li>\n</ul>\n<span class=\"paragraph\"><strong>Next step:</strong> Open <code>03_plotting.py</code> to learn data visualization!</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "dGlV",
+      "code_hash": "1d0db38904205bec4d6f6f6a1f6cec3e",
+      "outputs": [],
+      "console": []
+    }
+  ]
+}

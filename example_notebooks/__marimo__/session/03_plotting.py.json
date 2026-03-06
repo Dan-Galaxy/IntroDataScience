@@ -1,0 +1,235 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.19.6"
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "71efd32483a73a55fefb77d04c16b7a9",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"data-visualization-with-plotly\">Data Visualization with Plotly \ud83d\udcca</h1>\n<span class=\"paragraph\"><strong>Welcome!</strong> Learn to create beautiful, interactive visualizations.</span>\n<span class=\"paragraph\"><strong>What you'll learn:</strong></span>\n<ul>\n<li>Line charts (trends over time)</li>\n<li>Bar charts (categorical comparisons)</li>\n<li>Scatter plots (relationships)</li>\n<li>Histograms (distributions)</li>\n<li>Customizing plots</li>\n<li>Interactive features</li>\n</ul>\n<span class=\"paragraph\"><strong>Estimated time:</strong> 45 minutes</span>\n<hr /></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "fde845d309e739b01ec485444d7b649a",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"1-setup-and-load-data\">1. Setup and Load Data</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "88332856a0e060efd9a29abbefca9ea8",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"2-line-charts-trends-over-time\">2. Line Charts - Trends Over Time</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "6ee311cc5a8c254455cb0c074914517b",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"3-bar-charts-categorical-comparisons\">3. Bar Charts - Categorical Comparisons</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "RGSE",
+      "code_hash": "b69e493e57bafc5f53db81348a587058",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"4-scatter-plots-relationships\">4. Scatter Plots - Relationships</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Hstk",
+      "code_hash": "157fbbeae8c3a6a10aab464e55d33a18",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"5-histograms-distributions\">5. Histograms - Distributions</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ZHCJ",
+      "code_hash": "e34a8ce6766ec6737c92829eb651b0d2",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"6-customizing-colors-and-labels\">6. Customizing Colors and Labels</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "qnkX",
+      "code_hash": "b781e7a48b0c4065de0e21f2098518a3",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"7-subplots-multiple-charts\">7. Subplots - Multiple Charts</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Vxnm",
+      "code_hash": "65a579506190bfa8e5ce878b3d7e25e2",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"8-pie-chart-proportions\">8. Pie Chart - Proportions</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ulZA",
+      "code_hash": "8458c25de6924f96d67dfd4fb6acd632",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"9-combining-everything\">9. Combining Everything</h2>\n<span class=\"paragraph\">Let's create a comprehensive sales dashboard:</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Pvdt",
+      "code_hash": "e309208bcd0a35601f5a88ba49fea138",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"excellent-work\">\ud83c\udf89 Excellent Work!</h2>\n<span class=\"paragraph\">You've mastered data visualization with Plotly! You now know:</span>\n<ul>\n<li>\u2705 Line charts for trends</li>\n<li>\u2705 Bar charts for comparisons</li>\n<li>\u2705 Scatter plots for relationships</li>\n<li>\u2705 Histograms for distributions</li>\n<li>\u2705 Pie charts for proportions</li>\n<li>\u2705 Subplots for dashboards</li>\n<li>\u2705 Interactive features and customization</li>\n</ul>\n<span class=\"paragraph\"><strong>Next step:</strong> Start practicing with Exercise 1 in the <code>exercises/</code> folder!</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "f171524a0c65504e2b52dde210b81aca",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "583e05eb6294ee5a0ec00b19e0f8b832",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "17c2627995db045a9168c9d4167531d0",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "f3fbffcd04022edc913b59b5070d3380",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "BYtC",
+      "code_hash": "659d671b9f0544d334595c9563583ad5",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "Kclp",
+      "code_hash": "2c598026a64ed771a721a5cb86a96871",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "emfo",
+      "code_hash": "788ff0a53308d694cc44de509e258e7b",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "nWHF",
+      "code_hash": "88ea35dffb902160eb7f0221cf33a06a",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "iLit",
+      "code_hash": "51cc30d71edfb97faf70d636b9c4ec18",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ROlb",
+      "code_hash": "bb5665f598aa1c312595b1ad0166bddc",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "TqIu",
+      "code_hash": "53daa57ed28b6f8e93274d1dc27d5bc1",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "DnEU",
+      "code_hash": "925104afbc9177bbaffae5873b8618c5",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ecfG",
+      "code_hash": "b84d451e0063c64a937f0d8b6d667e64",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ZBYS",
+      "code_hash": "1d0db38904205bec4d6f6f6a1f6cec3e",
+      "outputs": [],
+      "console": []
+    }
+  ]
+}

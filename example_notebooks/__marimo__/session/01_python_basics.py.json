@@ -1,0 +1,284 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.20.2"
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "1084a8736ee982ea927653c276f61843",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"python-basics-for-data-science\">Python Basics for Data Science \ud83d\udc0d</h1>\n<span class=\"paragraph\"><strong>Welcome!</strong> This notebook will teach you essential Python concepts needed for data science.</span>\n<span class=\"paragraph\"><strong>What you'll learn:</strong></span>\n<ul>\n<li>Variables and data types</li>\n<li>Lists and dictionaries</li>\n<li>Control flow (if/else, loops)</li>\n<li>Functions</li>\n</ul>\n<span class=\"paragraph\"><strong>Estimated time:</strong> 45 minutes</span>\n<hr /></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "41ad184d9bfe5e28493810dc42b96f3d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"1-variables-and-data-types\">1. Variables and Data Types</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "bec506398097ae62c7fc80bb9c25aa06",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h3 id=\"data-types\">Data Types</h3>\n<span class=\"paragraph\">Python has several basic data types:</span>\n<ul>\n<li><strong>str</strong> (string): Text data like <code>\"Hello\"</code></li>\n<li><strong>int</strong> (integer): Whole numbers like <code>42</code></li>\n<li><strong>float</strong>: Decimal numbers like <code>3.14</code></li>\n<li><strong>bool</strong> (boolean): <code>True</code> or <code>False</code></li>\n</ul></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "7e53596f3b0ac7ea1e3811ccff68f998",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"2-basic-operations\">2. Basic Operations</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "BYtC",
+      "code_hash": "50b10ec8bda1e36c95183b79335b342f",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"3-lists-ordered-collections\">3. Lists - Ordered Collections</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Hstk",
+      "code_hash": "acbb6c04b7c928e22a8dc8a08ac259f2",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"4-dictionaries-key-value-pairs\">4. Dictionaries - Key-Value Pairs</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ZHCJ",
+      "code_hash": "b77659e959a1c179fc34bfc120a2dbe4",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"5-control-flow-ifelse\">5. Control Flow - If/Else</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "qnkX",
+      "code_hash": "17a1b1e1d226d140a1e76810020e4d57",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"6-loops-for-loop\">6. Loops - For Loop</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ulZA",
+      "code_hash": "2ef1e116fcfe76c7bc57386602192a39",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"7-list-comprehensions-elegant-loops\">7. List Comprehensions - Elegant Loops</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "ZBYS",
+      "code_hash": "575b6a1e7421d55cd3495de093c5b61e",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"8-functions-reusable-code\">8. Functions - Reusable Code</h2></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "AjVT",
+      "code_hash": "2b7a5cef727589bb07fdb5664314cc10",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"9-putting-it-all-together\">9. Putting It All Together</h2>\n<span class=\"paragraph\">Let's use everything we learned to analyze some data!</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "NCOB",
+      "code_hash": "bc4626a114d4708980e792252973d372",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"congratulations\">\ud83c\udf89 Congratulations!</h2>\n<span class=\"paragraph\">You've learned the Python basics! You now know:</span>\n<ul>\n<li>\u2705 Variables and data types</li>\n<li>\u2705 Basic operations</li>\n<li>\u2705 Lists and dictionaries</li>\n<li>\u2705 If/else statements</li>\n<li>\u2705 For loops</li>\n<li>\u2705 List comprehensions</li>\n<li>\u2705 Functions</li>\n</ul>\n<span class=\"paragraph\"><strong>Next step:</strong> Open <code>02_data_wrangling.py</code> to learn about working with real datasets!</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "0ef7f7daca0da95acf82d30e236ac98b",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "899cc477b72ac93512104c9cf228d545",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "cabc5b235ca63b57d15263607691a596",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "7f710198ced962127d3c2c6efc581364",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "RGSE",
+      "code_hash": "a12808639e8781320f07a4cece92ccd8",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "Kclp",
+      "code_hash": "6cfd9b2a5f91338c77cc51cd30729f89",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "emfo",
+      "code_hash": "6ccc94d45726f71aef6ac88c5b714b75",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "nWHF",
+      "code_hash": "70b7e31f6932415afe801f5dfe8df0ab",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "iLit",
+      "code_hash": "392e56c6392a07df77aebcabaec359b5",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ROlb",
+      "code_hash": "d38fe5414499dd178b4c8e2c7d4292a6",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "TqIu",
+      "code_hash": "848f6873d3432fdcc894101d480fa4e7",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "Vxnm",
+      "code_hash": "af6149b021904e447df1f70aa17130d0",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "DnEU",
+      "code_hash": "6c5cee2716d4c6b15704491be0e09ba9",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "ecfG",
+      "code_hash": "0982729518ed1c4223204031a88e0993",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "Pvdt",
+      "code_hash": "b0fb2bbe5afa3a8e6289a690f07c432f",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "aLJB",
+      "code_hash": "5aeeca2478b0a05a820e831b017315ad",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "nHfw",
+      "code_hash": "5b8d5a4e49fd6c8e04c5429f76f9c281",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "xXTn",
+      "code_hash": "279f4efa6a2185547d2082b6347637be",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "pHFh",
+      "code_hash": "694d2503efe2888b3522642324364ec4",
+      "outputs": [],
+      "console": []
+    },
+    {
+      "id": "aqbW",
+      "code_hash": "1d0db38904205bec4d6f6f6a1f6cec3e",
+      "outputs": [],
+      "console": []
+    }
+  ]
+}

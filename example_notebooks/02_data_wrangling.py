@@ -40,7 +40,9 @@ def _():
     import polars as pl
 
     # Load CSV file
-    students = pl.read_csv("../data/raw/students.csv")
+    students = pl.read_csv("C:/Users/DaN/IntroDataScience/data/raw/students.csv")
+    #C:\Users\DaN\IntroDataScience\data\raw\students.csv
+    #data\raw\students.csv
 
     print("✓ Loaded students.csv")
     print(f"Shape: {students.shape[0]} rows × {students.shape[1]} columns")
@@ -55,6 +57,12 @@ def _(students):
 
 
 @app.cell
+def _(students):
+    students.describe()
+    return
+
+
+@app.cell
 def _(mo):
     mo.md(r"""
     ### Loading JSON
@@ -65,7 +73,7 @@ def _(mo):
 @app.cell
 def _(pl):
     # Load JSON file
-    sales = pl.read_json("../data/raw/sales.json")
+    sales = pl.read_json("C:/Users/DaN/IntroDataScience/data/raw/sales.json")
 
     print("✓ Loaded sales.json")
     print(f"Shape: {sales.shape[0]} rows × {sales.shape[1]} columns")
