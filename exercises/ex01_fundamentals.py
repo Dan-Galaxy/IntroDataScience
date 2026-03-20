@@ -1,14 +1,14 @@
 # /// script
 # requires-python = ">=3.12"
 # dependencies = [
-#     "marimo",
+#     "marimo>=0.20.2",
 #     "pyzmq",
 # ]
 # ///
 
 import marimo
 
-__generated_with = "0.19.6"
+__generated_with = "0.20.4"
 app = marimo.App(width="medium")
 
 
@@ -101,10 +101,10 @@ def _():
     favorite_foods = ["rice", "beans", "amala", "banga"]  # Add your foods here
 
     # TODO: Print the first food
-    print(f"First food: {favorite_foods[0]}")  # Fix this line
+    print(f"First food: {favorite_foods[0]}") 
 
     # TODO: Print the last food
-    print(f"Last food: {favorite_foods[-1]}")  # Fix this line
+    print(f"Last food: {favorite_foods[-1]}")  
 
     # TODO: Add another food to the list
     # (use the append method)
@@ -112,7 +112,7 @@ def _():
     print("After append:", favorite_foods)
 
     # TODO: Print the length of the list
-    print(f"Number of foods: {len(favorite_foods)}")  # Fix this line
+    print(f"Number of foods: {len(favorite_foods)}")
     return
 
 
@@ -168,7 +168,7 @@ def _():
     # - If temp > 10: "It's cool"
     # - Otherwise: "It's cold!"
 
-    temperature = 25  # Try changing this value
+    temperature = 52  # Try changing this value
 
     # Write your if/elif/else statements here
     if temperature >= 30:
@@ -240,7 +240,7 @@ def _():
     # Use a list comprehension with a condition!
 
     all_numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-    even_numbers = []  # Use list comprehension here
+    even_numbers = [n for n in all_numbers if n % 2 == 0]  # Use list comprehension here
 
     print(f"Even numbers: {even_numbers}")
     # Expected: [2, 4, 6, 8, 10, 12]
@@ -261,7 +261,7 @@ def _():
     # Example: greet("Alice") should return "Hello, Alice!"
 
     def greet(name):
-        pass  # Replace with your code
+        return f"Hello, {name}!"
 
     # Test your function
     print(greet("Alice"))
@@ -284,7 +284,8 @@ def _():
     # It should return width * height
 
     def calculate_area(width, height):
-        pass  # Replace with your code
+        area = width * height
+        return area
 
     # Test your function
     area1 = calculate_area(5, 10)
@@ -314,9 +315,9 @@ def _():
     def analyze_numbers(numbers):
         # Write your code here
         result = {
-            "count": 0,
-            "sum": 0,
-            "average": 0
+            "count": len(numbers),
+            "sum": sum(numbers),
+            "average":sum(numbers) / len(numbers)
         }
         return result
 
@@ -357,6 +358,7 @@ def _(mo):
 @app.cell
 def _():
     import marimo as mo
+
     return (mo,)
 
 
