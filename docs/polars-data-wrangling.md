@@ -1,4 +1,4 @@
-# Polars Data Wrangling
+ # Polars Data Wrangling
 
 Master data manipulation with Polars, the blazing-fast DataFrame library.
 
