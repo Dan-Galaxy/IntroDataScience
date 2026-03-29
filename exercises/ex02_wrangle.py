@@ -45,7 +45,7 @@ def _():
     from datetime import datetime
     import marimo as mo
 
-    return (mo,)
+    return mo, pl
 
 
 @app.cell(hide_code=True)
@@ -102,7 +102,7 @@ def _(mo):
 def _(pl, students):
     # TODO: Filter to find students who scored above 85 on their test
 
-    high_scorers = students.filter(pl.col("test_score") > 85)  # Use students.filter(...)
+    high_scorers = students.filter(pl.col("test_score") > 85)  
 
     print(f"Number of high scorers: {len(high_scorers) if high_scorers is not None else 0}")
     high_scorers.head()
@@ -137,11 +137,11 @@ def _(students):
 
     subset = students.select(["name", "grade_level", "test_score"])
     subset.head()
-    return
+    return (subset,)
 
 
 @app.cell
-def _(pl, students):
+def _(pl, subset):
     # TODO: Create a new column "performance_category" that categorizes students:
     # - "Excellent" if test_score >= 90
     # - "Good" if test_score >= 75
@@ -150,7 +150,7 @@ def _(pl, students):
 
     # Hint: Use pl.when().then().otherwise() chains
 
-    students_categorized = students.with_columns([
+    students_categorized = subset.with_columns([
         pl.when(pl.col("test_score") >= 90)
             .then(pl.lit("Excellent"))
             .when(pl.col("test_score") >= 75)
@@ -161,7 +161,7 @@ def _(pl, students):
             .alias("performance_category")
     ])
 
-    students_categorized.select(["name", "test_score", "performance_category"]).head()
+    students_categorized.head()
     return
 
 
@@ -178,7 +178,7 @@ def _(pl):
     # TODO: Load the sales.json file
     # The file is at: ../data/raw/sales.json
 
-    sales = pl.read_json("../data/raw/sales.json")  # Replace with pl.read_json(...)
+    sales = pl.read_json("../data/raw/sales.json")
     return (sales,)
 
 
@@ -200,6 +200,13 @@ def _(sales):
     return
 
 
+@app.cell
+def _(sales):
+    # Null count per column
+    sales.null_count()
+    return
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
@@ -209,32 +216,50 @@ def _(mo):
 
 
 @app.cell
-def _():
+def _(pl, sales):
     # TODO: Calculate total sales by product_category
     # Sum up the total_amount for each category
     # Sort by total sales descending
 
-    category_sales = None  # Use group_by() and agg()
+    category_sales = (
+        sales.group_by("product_category")
+        .agg(pl.col("total_amount").sum()
+        .alias("total_sales"))
+        .sort("total_sales", descending=True)
+    )
+     # Use group_by() and agg()
 
+    category_sales.head()
     return
 
 
 @app.cell
-def _():
+def _(pl, sales):
     # TODO: Find the average transaction amount by payment_method
 
-    avg_by_payment = None
-
+    avg_by_payment = (
+        sales.group_by("payment_method")
+        .agg(pl.col("total_amount").mean()
+        .alias("avg_transaction_amount"))
+        .sort("avg_transaction_amount", descending=True)
+    )
+    avg_by_payment.head()
     return
 
 
 @app.cell
-def _():
+def _(pl, sales):
     # TODO: Count how many transactions each region had
     # Also calculate the total revenue per region
 
-    region_summary = None  # Group by region, count and sum
-
+    region_summary = (
+        sales.group_by("region")
+        .agg([
+            pl.len().alias("transaction_per_region_count"),
+            pl.col("total_amount").sum().alias("total_revenue")
+        ]).sort("total_revenue", descending=True)
+    )  # Group by region, count and sum
+    region_summary.head()
     return
 
 
@@ -276,16 +301,18 @@ def _(pl, sales_with_month):
     monthly_sales = (
         sales_with_month
         .group_by("month")
-        .agg(pl.col("total_amount").sum()
-        .alias("total_revenue"))
-        .sort("total_revenue", descending=True)
+        .agg([
+            pl.col("total_amount").sum().alias("monthly_total_revenue"),
+            pl.len().alias("transaction_count")
+        ]).sort("monthly_total_revenue", descending=True)
     )
 
     # Month with highest revenue
-    top_month = monthly_sales.select("month").row(0)
+    top_month = monthly_sales.row(0,named=True)
+    #("month").row(0)
 
-    print(monthly_sales)
     print(f"Month with highest revenue: {top_month}")
+    monthly_sales
     return
 
 
