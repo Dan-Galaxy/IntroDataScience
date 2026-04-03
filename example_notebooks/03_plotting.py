@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.19.6"
+__generated_with = "0.22.0"
 app = marimo.App(width="medium")
 
 
@@ -63,6 +63,12 @@ def _(mo):
 
 
 @app.cell
+def _(weather):
+    weather.show()
+    return
+
+
+@app.cell
 def _(px, weather):
     # Simple line chart
     fig1 = px.line(
@@ -98,12 +104,19 @@ def _(mo):
 
 
 @app.cell
+def _(sales):
+    sales.head()
+    return
+
+
+@app.cell
 def _(pl, px, students):
     # Count by category
     by_subject = students.group_by("subject").agg([
         pl.len().alias("count")
     ])
 
+    by_subject.head()
     fig3 = px.bar(
         by_subject,
         x="subject",
@@ -116,11 +129,20 @@ def _(pl, px, students):
 
 
 @app.cell
+def _(sales):
+    sales.head()
+    return
+
+
+@app.cell
 def _(pl, px, sales):
     # Sales by category
     category_sales = sales.group_by("product_category").agg([
         pl.col("total_amount").sum().alias("revenue")
     ]).sort("revenue", descending=True)
+
+
+
 
     fig4 = px.bar(
         category_sales,
@@ -129,7 +151,7 @@ def _(pl, px, sales):
         title="Total Revenue by Product Category",
         labels={"product_category": "Category", "revenue": "Revenue ($)"},
         color="revenue",
-        color_continuous_scale="Blues"
+        color_continuous_scale="Blues",
     )
     fig4
     return
@@ -427,6 +449,7 @@ def _(mo):
 @app.cell
 def _():
     import marimo as mo
+
     return (mo,)
 
 

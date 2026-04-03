@@ -411,6 +411,18 @@ def _(grade_info, students):
     )
 
     students_enriched.select(["name", "grade_level", "grade_name", "school_level"]).head()
+    return (students_enriched,)
+
+
+@app.cell
+def _(students):
+    students.head()
+    return
+
+
+@app.cell
+def _(students_enriched):
+    students_enriched.head()
     return
 
 
@@ -456,6 +468,12 @@ def _(mo):
 
     Let's clean the sales data which has some quality issues:
     """)
+    return
+
+
+@app.cell
+def _(sales):
+    sales.head()
     return
 
 
